@@ -19,6 +19,10 @@
                 <div class="list-group">
                     {% for result in results %}
                         <a data-url="{{ result.url|e }}" data-description="{{ result.description|e }}" data-title="{{ result.title|e }}" href="{{ path('app_search_search', {'q': q, 'link': result.url}) }}" class="list-group-item {% if result.url == link.url %}active{% endif %}">
+                            {% if result.favorite %}
+                                <span class="badge"><span class="glyphicon glyphicon-star-empty" aria-hidden="true"></span></span>
+                            {% endif %}
+
                             {{ result.title }}<br />
                             <div class="result-url">
                                 <small>{{ result.url }}</small>
@@ -38,6 +42,24 @@
                                 <small>
                                     <a id="result-url" href="{{ link.url }}">{{ link.url }}</a>
                                 </small>
+
+                                <div class="pull-right">
+                                    {% if is_granted('IS_AUTHENTICATED_REMEMBERED') %}
+                                        {% if link.favorite %}
+                                            <a href="#" class="favorite-icon" title="Remove from favorite list!">
+                                                <span class="glyphicon glyphicon-star" aria-hidden="true"></span>
+                                            </a>
+                                        {% else %}
+                                            <a href="#" class="favorite-icon" title="Add to favorite list!">
+                                                <span class="glyphicon glyphicon-star-empty" aria-hidden="true"></span>
+                                            </a>
+                                        {% endif %}
+                                    {% else %}
+                                        <a href="#" class="favorite-icon" title="You need to login to add this result to your favorite list!">
+                                            <span class="glyphicon glyphicon-star-empty" aria-hidden="true"></span>
+                                        </a>
+                                    {% endif %}
+                                </div>
                             </h4>
                         </div>
                         <div class="panel-collapse collapse in">

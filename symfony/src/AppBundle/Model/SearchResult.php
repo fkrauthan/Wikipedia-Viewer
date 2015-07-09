@@ -19,6 +19,11 @@ class SearchResult {
 	private $url;
 
 	/**
+	 * @var boolean
+	 */
+	private $favorite;
+
+	/**
 	 * @param string $title
 	 * @param string $description
 	 * @param string $url
@@ -27,6 +32,8 @@ class SearchResult {
 		$this->title = $title;
 		$this->description = $description;
 		$this->url = $url;
+
+		$this->favorite = false;
 	}
 
 	/**
@@ -48,6 +55,20 @@ class SearchResult {
 	 */
 	public function getUrl() {
 		return $this->url;
+	}
+
+	/**
+	 * @return boolean
+	 */
+	public function isFavorite() {
+		return $this->favorite;
+	}
+
+	/**
+	 * @param boolean $favorite
+	 */
+	public function setFavorite($favorite) {
+		$this->favorite = $favorite;
 	}
 
 }
