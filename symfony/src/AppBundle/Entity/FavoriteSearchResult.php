@@ -20,7 +20,7 @@ class FavoriteSearchResult {
 	protected $id;
 
 	/**
-	 * @ORM\ManyToOne(targetEntity="User", inversedBy="recentSearches")
+	 * @ORM\ManyToOne(targetEntity="User", inversedBy="favoriteSearchResults")
 	 * @ORM\JoinColumn(name="user_id", referencedColumnName="id")
 	 *
 	 * @var User
