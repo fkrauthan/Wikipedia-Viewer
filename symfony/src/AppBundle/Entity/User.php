@@ -3,13 +3,14 @@ namespace AppBundle\Entity;
 
 use Doctrine\Common\Collections\ArrayCollection;
 use Doctrine\ORM\Mapping as ORM;
+use FOS\UserBundle\Model\User as BaseUser;
 
 
 /**
  * @ORM\Entity
  * @ORM\Table(name="users")
  */
-class User {
+class User extends BaseUser {
 
 	/**
 	 * @ORM\Id
@@ -35,6 +36,8 @@ class User {
 	protected $favoriteSearchResults;
 
 	public function __construct() {
+		parent::__construct();
+
 		$this->recentSearches = new ArrayCollection();
 		$this->favoriteSearchResults = new ArrayCollection();
 	}

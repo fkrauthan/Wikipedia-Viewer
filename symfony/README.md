@@ -47,3 +47,11 @@ How to start the dev server?
 
 1. Execute the `php app/console server:run` command.
 1. Browse to the `http://localhost:8000` URL.
+
+
+Thinks I would improve for a real world application
+---------------------------------------------------
+
+* Asset combination and minimization (Using assetic)
+* Using `less` instead of `css`
+* Using mysql or something similar (no sqlite db)
