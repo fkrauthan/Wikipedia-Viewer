@@ -56,3 +56,4 @@ Thinks I would improve for a real world application
 * Using `less` instead of `css`
 * Using mysql or something similar (no sqlite db)
 * Validate the response before parsing it
+* More login methods (e.g. Facebook, Twitter)

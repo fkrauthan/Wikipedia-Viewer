@@ -1,0 +1,58 @@
+{% extends 'AppBundle::layout.html.twig' %}
+{% trans_default_domain 'FOSUserBundle' %}
+
+{% block title %}Sign In{% endblock %}
+
+{% block content %}
+    <div class="page-header">
+        <h1>Sign In</h1>
+    </div>
+
+    <div class="row">
+        <div class="col-md-8">
+            {% if error %}
+                <div class="alert alert-danger alert-dismissable">
+                    <button type="button" class="close" data-dismiss="alert" aria-hidden="true">&times;</button>
+                    <strong>Error! </strong> {{ error|trans(error.messageData, 'security') }}
+                </div>
+            {% endif %}
+
+            <form class="form-horizontal" action="{{ path("fos_user_security_check") }}" method="post" role="form">
+                <input type="hidden" name="_csrf_token" value="{{ csrf_token }}" />
+
+                <div class="form-group">
+                    <label class="col-sm-2 control-label" for="username">{{ 'security.login.username'|trans }}</label>
+                    <div class="col-sm-8">
+                        <input class="form-control" type="text" id="username" name="_username" value="{{ last_username }}" required="required" />
+                    </div>
+                </div>
+                <div class="form-group">
+                    <label class="col-sm-2 control-label" for="password">{{ 'security.login.password'|trans }}</label>
+                    <div class="col-sm-8">
+                        <input class="form-control" type="password" id="password" name="_password" required="required" />
+                    </div>
+                </div>
+
+                <div class="form-group">
+                    <div class="col-sm-offset-2 col-sm-8">
+                        <div class="checkbox">
+                            <label>
+                                <input type="checkbox" id="remember_me" name="_remember_me" value="on" /> {{ 'security.login.remember_me'|trans }}
+                            </label>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="form-group">
+                    <div class="col-sm-offset-2 col-sm-10">
+                        <button type="submit" class="btn btn-primary">{{ 'security.login.submit'|trans }}</button>
+                    </div>
+                </div>
+            </form>
+        </div>
+        <div class="col-md-4">
+            <p><a class="btn btn-default" href="{{ path('fos_user_registration_register') }}">I have no Account</a></p>
+            {#<p><a class="btn btn-default" href="{{ path('fos_user_resetting_request') }}">I don't know my Password</a></p>#}
+        </div>
+    </div>
+{% endblock %}

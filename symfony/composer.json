@@ -26,7 +26,9 @@
 		"friendsofsymfony/user-bundle": "2.0.*@dev",
 		"knplabs/knp-menu-bundle": "2.0.*@dev",
 		"knplabs/knp-menu": "2.0.*@dev",
-		"guzzlehttp/guzzle":"5.3.*"
+		"guzzlehttp/guzzle":"5.3.*",
+		"mopa/bootstrap-bundle": "3.0.0-beta4",
+		"ircmaxell/password-compat": "1.0.*"
     },
     "require-dev": {
         "sensio/generator-bundle": "~2.3"

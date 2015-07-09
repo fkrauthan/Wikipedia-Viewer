@@ -12,11 +12,20 @@
         <div id="navbar" class="navbar-collapse collapse">
             {{ knp_menu_render('AppBundle:NavbarMenu:mainMenu', {'currentClass': 'active'}) }}
 
-            <ul class="nav navbar-nav navbar-right">
-                <li><a href="../navbar/">Default</a></li>
-                <li class="active"><a href="./">Static top <span class="sr-only">(current)</span></a></li>
-                <li><a href="../navbar-fixed-top/">Fixed top</a></li>
-            </ul>
+            <div class="navbar-form navbar-right">
+                <div class="btn-group">
+                    {% if app.user and is_granted('IS_AUTHENTICATED_REMEMBERED') %}
+                        <a class="btn btn-default dropdown-toggle" data-toggle="dropdown" href="#">
+                            <span class="glyphicon glyphicon-user"></span><span class="hidden-phone"> {{ app.user.username }}</span>
+                            <span class="caret"></span>
+                        </a>
+                        {{ knp_menu_render('AppBundle:NavbarMenu:userMenu', {'currentClass': 'active'}) }}
+                    {% else %}
+                        <a class="btn btn-default" href="{{ path('fos_user_security_login') }}">Sign In</a>
+                        <a class="btn btn-default" href="{{ path('fos_user_registration_register') }}">Sign Up</a>
+                    {% endif %}
+                </div>
+            </div>
         </div><!--/.nav-collapse -->
     </div>
 </nav>

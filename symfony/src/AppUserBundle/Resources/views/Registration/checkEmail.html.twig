@@ -1,0 +1,12 @@
+{% extends 'AppBundle::layout.html.twig' %}
+{% trans_default_domain 'FOSUserBundle' %}
+
+{% block title %}Sign Up{% endblock %}
+
+{% block content %}
+    <div class="page-header">
+        <h1>Sign Up</h1>
+    </div>
+
+    <div class="alert alert-info">{{ 'registration.check_email'|trans({'%email%': user.email}) }}</div>
+{% endblock %}
