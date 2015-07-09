@@ -58,3 +58,5 @@ Thinks I would improve for a real world application
 * Validate the response before parsing it
 * More login methods (e.g. Facebook, Twitter)
 * Email validation for registration (disabled because there is most likely no email server running)
+* Paginating for search results
+* Paginating for favorites list
