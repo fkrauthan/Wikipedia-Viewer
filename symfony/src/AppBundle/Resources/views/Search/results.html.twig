@@ -1,0 +1,56 @@
+{% extends 'AppBundle::layout.html.twig' %}
+{% block title %}Home{% endblock %}
+{% block page_title %}Home{% endblock %}
+
+{% block content %}
+    {% include 'AppBundle:elements:search_field.html.twig' %}
+
+    <div class="search-results">
+        <h2>Search Results</h2>
+
+        <p>
+            {% transchoice results|length %}\
+            {0}We found <strong>no</strong> Results|{1}We found <strong>1</strong> Result|]1,Inf[We found <strong>%count%</strong> Results. Have fun exploring!
+            {% endtranschoice %}
+        </p>
+
+        <div class="row">
+            <div class="col-md-4 col-sm-6">
+                <div class="list-group">
+                    {% for result in results %}
+                        <a href="{{ path('app_search_search', {'q': q, 'link': result.url}) }}" class="list-group-item {% if result.url == link.url %}active{% endif %}">
+                            {{ result.title }}<br />
+                            <div class="result-url">
+                                <small>{{ result.url }}</small>
+                            </div>
+                        </a>
+                    {% endfor %}
+                </div>
+            </div>
+
+            <div class="col-md-8 col-sm-6">
+
+                <div class="panel-group">
+                    <div class="panel panel-default">
+                        <div class="panel-heading">
+                            <h4 class="panel-title">
+                                <span id="result-title">{{ link.title }}</span>
+                                <small id="result-url">{{ link.url }}</small>
+                            </h4>
+                        </div>
+                        <div class="panel-collapse collapse in">
+                            <div class="panel-body">
+                                <div class="alert alert-info" id="result-description">
+                                    {{ link.description }}
+                                </div>
+
+                                <iframe src="{{ link.url }}" id="result-iframe"></iframe>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+            </div>
+        </div>
+    </div>
+{% endblock %}

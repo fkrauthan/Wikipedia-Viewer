@@ -55,3 +55,4 @@ Thinks I would improve for a real world application
 * Asset combination and minimization (Using assetic)
 * Using `less` instead of `css`
 * Using mysql or something similar (no sqlite db)
+* Validate the response before parsing it
