@@ -15,4 +15,12 @@ class SiteController extends Controller {
 		return array();
 	}
 
+	/**
+	 * @Route("/about")
+	 * @Template()
+	 */
+	public function aboutAction() {
+		return array();
+	}
+
 }

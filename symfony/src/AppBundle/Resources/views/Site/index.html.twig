@@ -1,24 +1,11 @@
 {% extends 'AppBundle::layout.html.twig' %}
 {% block title %}Home{% endblock %}
-{% block page_title %}Home{% endblock %}
 
 {% block content %}
-    <section class="section--center mdl-grid mdl-grid--no-spacing mdl-shadow--2dp">
-        <div class="mdl-card mdl-cell mdl-cell--12-col">
-            <div class="mdl-card__supporting-text">
-                <h4>Search</h4>
-                Please use the search field on the bottom to search for Wikipedia pages.
-                Dolore ex deserunt aute fugiat aute nulla ea sunt aliqua nisi cupidatat eu. Nostrud in laboris labore nisi amet do dolor eu fugiat consectetur elit cillum esse.
-                Dolore ex deserunt aute fugiat aute nulla ea sunt aliqua nisi cupidatat eu. Nostrud in laboris labore nisi amet do dolor eu fugiat consectetur elit cillum esse.
-            </div>
-        </div>
-        <button class="mdl-button mdl-js-button mdl-js-ripple-effect mdl-button--icon" id="btn1">
-            <i class="material-icons">more_vert</i>
-        </button>
-        <ul class="mdl-menu mdl-js-menu mdl-menu--bottom-right" for="btn1">
-            <li class="mdl-menu__item">Recent Searches</li>
-        </ul>
-    </section>
+    <div class="jumbotron">
+        <h1>Welcome</h1>
+        <p>Please use the search field on the bottom to search for Wikipedia pages.</p>
+    </div>
 
     {% include 'AppBundle:elements:search_field.html.twig' %}
 {% endblock %}

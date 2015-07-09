@@ -1,70 +1,36 @@
-<!doctype html>
+<!DOCTYPE html>
 <html lang="en">
     <head>
         <meta charset="utf-8">
         <meta http-equiv="X-UA-Compatible" content="IE=edge">
-        <meta name="description" content="A front-end template that helps you build fast, modern mobile web apps.">
         <meta name="viewport" content="width=device-width, initial-scale=1">
+        <!-- The above 3 meta tags *must* come first in the head; any other head content must come *after* these tags -->
         <title>{% block title %}{% endblock %} - Wikipedia Viewer</title>
 
-        <!-- Add to homescreen for Chrome on Android -->
-        <meta name="mobile-web-app-capable" content="yes">
-        {#<link rel="icon" sizes="192x192" href="images/touch/chrome-touch-icon-192x192.png">#}
+        <!-- Bootstrap -->
+        <link href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.5/css/bootstrap.min.css" rel="stylesheet">
+        <link href="{{ asset('bundles/app/css/styles.css') }}" rel="stylesheet">
 
-        <!-- Add to homescreen for Safari on iOS -->
-        <meta name="apple-mobile-web-app-capable" content="yes">
-        <meta name="apple-mobile-web-app-status-bar-style" content="black">
-        <meta name="apple-mobile-web-app-title" content="Wikipedia Viewer">
-        {#<link rel="apple-touch-icon-precomposed" href="apple-touch-icon-precomposed.png">#}
-
-        <!-- Tile icon for Win8 (144x144 + tile color) -->
-        {#<meta name="msapplication-TileImage" content="images/touch/ms-touch-icon-144x144-precomposed.png">#}
-        <meta name="msapplication-TileColor" content="#3372DF">
-
-
-        <link href="https://fonts.googleapis.com/css?family=Roboto:regular,bold,italic,thin,light,bolditalic,black,medium&amp;lang=en" rel="stylesheet">
-        <link href="https://fonts.googleapis.com/icon?family=Material+Icons"
-              rel="stylesheet">
-        <link rel="stylesheet" href="https://storage.googleapis.com/code.getmdl.io/1.0.0/material.indigo-pink.min.css">
-        <link rel="stylesheet" href="{{ asset('bundles/app/css/styles.css') }}">
+        <!-- HTML5 shim and Respond.js for IE8 support of HTML5 elements and media queries -->
+        <!-- WARNING: Respond.js doesn't work if you view the page via file:// -->
+        <!--[if lt IE 9]>
+        <script src="https://oss.maxcdn.com/html5shiv/3.7.2/html5shiv.min.js"></script>
+        <script src="https://oss.maxcdn.com/respond/1.4.2/respond.min.js"></script>
+        <![endif]-->
     </head>
-    <body class="mdl-demo mdl-color--grey-100 mdl-color-text--grey-700 mdl-base">
-        <div class="mdl-layout mdl-js-layout mdl-layout--fixed-header">
-            <header class="mdl-layout__header mdl-layout__header--scroll mdl-color--primary">
-                <div class="mdl-layout--large-screen-only mdl-layout__header-row">
-                </div>
-                <div class="mdl-layout__header-row">
-                    <h3>Wikipedia Viewer</h3>
-                </div>
-                <div class="mdl-layout--large-screen-only mdl-layout__header-row">
-                </div>
-                <div class="mdl-layout--large-screen-only mdl-layout__tab-bar mdl-js-ripple-effect mdl-color--primary-dark">
-                    <a href="#overview" class="mdl-layout__tab is-active">Overview</a>
-                    <a href="#about" class="mdl-layout__tab">About</a>
-                </div>
-            </header>
-            <div class="mdl-layout__drawer">
-                <span class="mdl-layout-title">Wikipedia Viewer</span>
-                <nav class="mdl-navigation">
-                    <a href="#overview" class="mdl-navigation__link">Overview</a>
-                    <a href="#about" class="mdl-navigation__link">About</a>
-                </nav>
-            </div>
-            <main class="mdl-layout__content">
-                <div class="mdl-layout__tab-panel is-active" id="overview">
-                    {% block content %}{% endblock %}
-                </div>
-                <div class="mdl-layout__tab-panel" id="about">
-                    <section class="section--center mdl-grid mdl-grid--no-spacing">
-                        {% include 'AppBundle:elements:about.html.twig' %}
-                    </section>
-                </div>
-                <footer class="mdl-mega-footer">
-                    {% include 'AppBundle:elements:footer.html.twig' %}
-                </footer>
-            </main>
+    <body>
+        {% include 'AppBundle:elements:navbar.html.twig' %}
+
+        <div class="container">
+            {% block content %}{% endblock %}
         </div>
-        <script src="https://storage.googleapis.com/code.getmdl.io/1.0.0/material.min.js"></script>
+
+        {% include 'AppBundle:elements:footer.html.twig' %}
+
+        <!-- jQuery (necessary for Bootstrap's JavaScript plugins) -->
+        <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.3/jquery.min.js"></script>
+        <!-- Include all compiled plugins (below), or include individual files as needed -->
+        <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.5/js/bootstrap.min.js"></script>
         <script src="{{ asset('bundle/app/js/search.js') }}"></script>
     </body>
 </html>

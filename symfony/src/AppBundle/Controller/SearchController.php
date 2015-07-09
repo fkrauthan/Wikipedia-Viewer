@@ -16,8 +16,14 @@ class SearchController extends Controller {
 	 */
 	public function searchAction(Request $request) {
 		$searchTerm = $request->get('q', '');
+		$searchResults = array();
 
-		return $this->render('AppBundle:Search:no_results.html.twig', array('q' => $searchTerm));
+		if(count($searchResults) == 0) {
+			return $this->render('AppBundle:Search:no_results.html.twig', array('q' => $searchTerm));
+		}
+		else {
+			return $this->render('AppBundle:Search:results.html.twig', array('q' => $searchTerm, 'results' => $searchResults));
+		}
 	}
 
 }

@@ -1,17 +1,11 @@
 
-<section class="section--center mdl-grid mdl-grid--no-spacing mdl-shadow--2dp">
-    <div class="mdl-card mdl-cell mdl-cell--12-col">
-        <div class="mdl-card__supporting-text">
-            <form action="{{ path('app_search_search') }}" method="GET">
-                <div class="mdl-textfield mdl-js-textfield search-field">
-                    <input class="mdl-textfield__input" type="text" name="q" id="search_term" value="{{ q|default('') }}" required />
-                    <label class="mdl-textfield__label" for="search_term">Enter search term...</label>
-                </div>
-
-                <button class="mdl-button mdl-js-button mdl-button--raised mdl-button--colored" type="submit">
-                    Search
-                </button>
-            </form>
+<div class="well">
+    <form action="{{ path('app_search_search') }}" method="GET">
+        <div class="form-group">
+            <input type="text" name="q" value="{{ q|default('') }}" required  class="form-control input-lg" placeholder="Enter search term...">
         </div>
-    </div>
-</section>
+        <button type="submit" class="btn btn-primary">Search</button>
+    </form>
+</div>
+
+
