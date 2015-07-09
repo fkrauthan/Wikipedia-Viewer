@@ -1,0 +1,35 @@
+{% extends 'AppBundle::layout.html.twig' %}
+{% trans_default_domain 'FOSUserBundle' %}
+
+{% block title %}Profile{% endblock %}
+
+{% block content %}
+    <div class="page-header">
+        <h1>Profile</h1>
+    </div>
+
+    {% if app.request.hasPreviousSession %}
+        {% for type, messages in app.session.flashbag.all() %}
+            {% for message in messages %}
+                <div class="alert alert-{{ type }} alert-dismissable">
+                    <button type="button" class="close" data-dismiss="alert" aria-hidden="true">&times;</button>
+                    {{ message }}
+                </div>
+            {% endfor %}
+        {% endfor %}
+    {% endif %}
+
+    <dl class="dl-horizontal">
+        <dt>{{ 'profile.show.username'|trans }}</dt>
+        <dd>{{ user.username }}</dd>
+
+        <dt>{{ 'profile.show.email'|trans }}</dt>
+        <dd>{{ user.email }}</dd>
+    </dl>
+
+    <div class="well">
+        <a href="{{ path('fos_user_profile_edit') }}" class="btn btn-default">Change Profile</a>
+
+        <a href="{{ path('fos_user_change_password') }}" class="btn btn-default">Change Password</a>
+    </div>
+{% endblock %}
