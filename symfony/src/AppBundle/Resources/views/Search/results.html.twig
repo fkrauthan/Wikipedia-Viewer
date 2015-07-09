@@ -18,7 +18,7 @@
             <div class="col-md-4 col-sm-6">
                 <div class="list-group">
                     {% for result in results %}
-                        <a href="{{ path('app_search_search', {'q': q, 'link': result.url}) }}" class="list-group-item {% if result.url == link.url %}active{% endif %}">
+                        <a data-url="{{ result.url|e }}" data-description="{{ result.description|e }}" data-title="{{ result.title|e }}" href="{{ path('app_search_search', {'q': q, 'link': result.url}) }}" class="list-group-item {% if result.url == link.url %}active{% endif %}">
                             {{ result.title }}<br />
                             <div class="result-url">
                                 <small>{{ result.url }}</small>
@@ -35,7 +35,9 @@
                         <div class="panel-heading">
                             <h4 class="panel-title">
                                 <span id="result-title">{{ link.title }}</span>
-                                <small id="result-url">{{ link.url }}</small>
+                                <small>
+                                    <a id="result-url" href="{{ link.url }}">{{ link.url }}</a>
+                                </small>
                             </h4>
                         </div>
                         <div class="panel-collapse collapse in">
