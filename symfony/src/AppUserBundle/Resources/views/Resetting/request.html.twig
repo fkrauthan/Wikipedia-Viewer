@@ -1,0 +1,27 @@
+{% extends 'AppBundle::layout.html.twig' %}
+{% trans_default_domain 'FOSUserBundle' %}
+
+{% block title %}Reset password{% endblock %}
+
+{% block content %}
+    <div class="page-header">
+        <h1>Reset password</h1>
+    </div>
+
+    {% if invalid_username is defined %}
+        <div class="alert alert-danger alert-dismissable">
+            <button type="button" class="close" data-dismiss="alert" aria-hidden="true">&times;</button>
+            <strong>Error!</strong> {{ 'resetting.request.invalid_username'|trans({'%username%': invalid_username}) }}
+        </div>
+    {% endif %}
+
+    <form action="{{ path('fos_user_resetting_send_email') }}" method="POST" class="fos_user_resetting_request">
+        <div class="form-group">
+            <label for="username">{{ 'resetting.request.username'|trans }}</label>
+            <input class="form-control" type="text" id="username" name="username" required="required" />
+        </div>
+
+        <input class="btn btn-primary" type="submit" value="{{ 'resetting.request.submit'|trans }}" />
+        <a class="btn btn-default" href="{{ path('fos_user_security_login') }}">Cancel</a>
+    </form>
+{% endblock %}
