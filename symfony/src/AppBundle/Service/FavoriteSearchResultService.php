@@ -5,6 +5,7 @@ use AppBundle\Entity\FavoriteSearchResult;
 use AppBundle\Entity\User;
 use AppBundle\Model\SearchResult;
 use AppBundle\Repository\FavoriteSearchResultRepository;
+use Doctrine\Common\Persistence\ObjectManager;
 use Symfony\Component\DependencyInjection\ContainerAware;
 
 class FavoriteSearchResultService extends ContainerAware {
@@ -34,6 +35,57 @@ class FavoriteSearchResultService extends ContainerAware {
 		return $results;
 	}
 
+	/**
+	 * @param $url string The url
+	 * @param $title string The title
+	 */
+	public function markAsFavorite($url, $title) {
+		$user = $this->container->get('security.token_storage')->getToken()->getUser();
+		if(!($user instanceof User)) {
+			return;
+		}
+
+		/** @var FavoriteSearchResultRepository $repository */
+		$repository = $this->container->get('doctrine')->getRepository('AppBundle:FavoriteSearchResult');
+		$favorite = $repository->findFavoredUrl($user, $url, $title);
+		if($favorite == null) {
+			$favorite = new FavoriteSearchResult();
+			$favorite->setUser($user);
+			$favorite->setUrl($url);
+			$favorite->setTitle($title);
+
+			/** @var ObjectManager $registry */
+			$om = $this->container->get('doctrine')->getManager();
+			$om->persist($favorite);
+			$om->flush();
+		}
+	}
+
+	/**
+	 * @param $url string The url
+	 * @param $title string The title
+	 */
+	public function unMarkAsFavorite($url, $title) {
+		$user = $this->container->get('security.token_storage')->getToken()->getUser();
+		if(!($user instanceof User)) {
+			return;
+		}
+
+		/** @var FavoriteSearchResultRepository $repository */
+		$repository = $this->container->get('doctrine')->getRepository('AppBundle:FavoriteSearchResult');
+		$favorite = $repository->findFavoredUrl($user, $url, $title);
+		if($favorite != null) {
+			/** @var ObjectManager $registry */
+			$om = $this->container->get('doctrine')->getManager();
+			$om->remove($favorite);
+			$om->flush();
+		}
+	}
+
+	/**
+	 * @param array $results The FavoriteSearchResult array
+	 * @return array string array with just the urls
+	 */
 	private function favoriteSearchResultToUrlArray(array $results) {
 		$urls = array();
 		foreach($results as $result) {

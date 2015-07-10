@@ -24,3 +24,6 @@ security:
         - { path: ^/login$, role: IS_AUTHENTICATED_ANONYMOUSLY }
         - { path: ^/register, role: IS_AUTHENTICATED_ANONYMOUSLY }
         - { path: ^/resetting, role: IS_AUTHENTICATED_ANONYMOUSLY }
+
+        - { path: ^/search-favorite-mark, role: IS_AUTHENTICATED_REMEMBERED }
+        - { path: ^/search-favorite-un-mark, role: IS_AUTHENTICATED_REMEMBERED }

@@ -42,28 +42,25 @@
                     <div class="panel panel-default">
                         <div class="panel-heading">
                             <h4 class="panel-title">
-                                <span id="result-title">{{ link.title }}</span>
-                                <small>
-                                    <a id="result-url" href="{{ link.url }}">{{ link.url }}</a>
-                                </small>
-
                                 <div class="pull-right">
                                     {% if is_granted('IS_AUTHENTICATED_REMEMBERED') %}
-                                        {% if link.favorite %}
-                                            <a href="#" class="favorite-icon" title="Remove from favorite list!">
-                                                <span class="glyphicon glyphicon-star" aria-hidden="true"></span>
-                                            </a>
-                                        {% else %}
-                                            <a href="#" class="favorite-icon" title="Add to favorite list!">
-                                                <span class="glyphicon glyphicon-star-empty" aria-hidden="true"></span>
-                                            </a>
-                                        {% endif %}
+                                        <a href="{{ path('app_favoritesearchresult_unmark', {'q': q, 'url': link.url, 'title': link.title}) }}" class="favorite-icon {% if not link.favorite %}hide{% endif %}" title="Remove from favorite list!">
+                                            <span class="glyphicon glyphicon-star" aria-hidden="true"></span>
+                                        </a>
+                                        <a href="{{ path('app_favoritesearchresult_mark', {'q': q, 'url': link.url, 'title': link.title}) }}" class="favorite-icon {% if link.favorite %}hide{% endif %}" title="Add to favorite list!">
+                                            <span class="glyphicon glyphicon-star-empty" aria-hidden="true"></span>
+                                        </a>
                                     {% else %}
-                                        <a href="#" class="favorite-icon" title="You need to login to add this result to your favorite list!">
+                                        <a href="{{ path('app_favoritesearchresult_mark', {'q': q, 'url': link.url, 'title': link.title}) }}" class="favorite-icon" title="You need to login to add this result to your favorite list!">
                                             <span class="glyphicon glyphicon-star-empty" aria-hidden="true"></span>
                                         </a>
                                     {% endif %}
                                 </div>
+
+                                <span id="result-title">{{ link.title }}</span><br />
+                                <small>
+                                    <a id="result-url" href="{{ link.url }}">{{ link.url }}</a>
+                                </small>
                             </h4>
                         </div>
                         <div class="panel-collapse collapse in">
