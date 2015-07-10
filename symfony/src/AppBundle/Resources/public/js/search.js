@@ -96,3 +96,6 @@ $('#mark-favorite').click(function(e) {
         $('.search-results .list-group a.active .favorite').removeClass('hide');
     });
 });
+
+Ladda.bind('input[type=submit]');
+Ladda.bind('button[type=submit]');
