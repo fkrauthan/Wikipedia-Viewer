@@ -61,3 +61,4 @@ Thinks I would improve for a real world application
 * Paginating for search results
 * Paginating for favorites list
 * Added unit testing
+* A general refactor of all the JS code and only include Js where it is really needed

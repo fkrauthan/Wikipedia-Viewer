@@ -9,18 +9,25 @@ var oPageInfo = {
     'url': location.href
 };
 
+var pageChanged = false;
 $('.search-results .list-group a').click(function(e) {
     e.preventDefault();
 
     var el = $(this);
     var favoriteEl = el.find('.favorite');
 
-    var url = el.data('url');
-    var description = el.data('description');
-    var title = el.data('title');
+    if(el.hasClass('active')) {
+        return;
+    }
+    pageChanged = true;
+    hideSpinnerForFavoriteChange();
 
-    var unMarkUrl = favoriteEl.data('un-mark');
-    var markUrl = favoriteEl.data('mark');
+    var url = el.attr('data-url');
+    var description = el.attr('data-description');
+    var title = el.attr('data-title');
+
+    var unMarkUrl = favoriteEl.attr('data-un-mark');
+    var markUrl = favoriteEl.attr('data-mark');
 
     $('#result-title').text(title);
     $('#result-url').attr('href', url).text(url);
@@ -74,11 +81,18 @@ if(supportHistory) {
 $('#un-mark-favorite').click(function(e) {
     e.preventDefault();
 
+    $('#un-mark-favorite').addClass('hide');
+    showSpinnerForFavoriteChange();
+    pageChanged = false;
+
     var el = $(this);
     var url = el.attr('href');
     $.get(url, function() {
-        $('#un-mark-favorite').addClass('hide');
-        $('#mark-favorite').removeClass('hide');
+        hideSpinnerForFavoriteChange();
+        if(!pageChanged) {
+            $('#mark-favorite').removeClass('hide');
+        }
+        pageChanged = false;
 
         $('.search-results .list-group a.active .favorite').addClass('hide');
     });
@@ -87,15 +101,48 @@ $('#un-mark-favorite').click(function(e) {
 $('#mark-favorite').click(function(e) {
     e.preventDefault();
 
+    $('#mark-favorite').addClass('hide');
+    showSpinnerForFavoriteChange();
+    pageChanged = false;
+
     var el = $(this);
     var url = el.attr('href');
     $.get(url, function() {
-        $('#un-mark-favorite').removeClass('hide');
-        $('#mark-favorite').addClass('hide');
+        hideSpinnerForFavoriteChange();
+        if(!pageChanged) {
+            $('#un-mark-favorite').removeClass('hide');
+        }
+        pageChanged = false;
 
         $('.search-results .list-group a.active .favorite').removeClass('hide');
     });
 });
+
+var spinnerForFavoriteChange = null;
+function showSpinnerForFavoriteChange() {
+    if(spinnerForFavoriteChange) {
+        hideSpinnerForFavoriteChange();
+    }
+
+    var container = $('#change-favorite-spin-container');
+    spinnerForFavoriteChange = new Spinner({
+        'top': '16px',
+        'left': '-20px',
+        'position': 'relative'
+    });
+    spinnerForFavoriteChange.spin();
+    container.append(spinnerForFavoriteChange.el);
+}
+
+function hideSpinnerForFavoriteChange() {
+    if(spinnerForFavoriteChange) {
+        spinnerForFavoriteChange.stop();
+        spinnerForFavoriteChange = null;
+    }
+
+    var container = $('#change-favorite-spin-container');
+    container.html('');
+}
 
 Ladda.bind('input[type=submit]');
 Ladda.bind('button[type=submit]');
