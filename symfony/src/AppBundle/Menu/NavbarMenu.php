@@ -22,6 +22,7 @@ class NavbarMenu extends ContainerAware {
 		$menu->setChildrenAttribute('class', 'dropdown-menu');
 
 		$menu->addChild('My Account', array('route' => 'fos_user_profile_show'));
+		$menu->addChild('My Favorites', array('route' => 'app_favoritesearchresult_list'));
 		$menu->addChild('Logout', array('route' => 'fos_user_security_logout'));
 
 		return $menu;

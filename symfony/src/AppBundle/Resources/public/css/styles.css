@@ -41,16 +41,16 @@ body {
     margin: 20px 0;
 }
 
-.search-results {
+.search-results, .favorites {
     padding-top: 1em;
 }
 
-.search-results .result-url {
+.search-results .result-url, .favorites .result-url {
     overflow: hidden;
     text-overflow: ellipsis;
 }
 
-.search-results .favorite-icon {
+.search-results .favorite-icon, .favorites .favorite-icon {
     color: #333;
     font-size: 2.2em;
 }

@@ -43,4 +43,16 @@ class FavoriteSearchResultRepository extends EntityRepository {
 		}
 	}
 
+	/**
+	 * @param \AppBundle\Entity\User $user the user
+	 * @return array of FavoriteSearchResult objects that belong to given user
+	 */
+	public function findAllByUser(User $user) {
+		$query =  $this->createQueryBuilder('f')
+			->where('f.user = :user')
+			->setParameter('user', $user)
+			->getQuery();
+		return $query->getResult();
+	}
+
 }

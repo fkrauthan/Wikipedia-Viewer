@@ -11,6 +11,20 @@ use Symfony\Component\DependencyInjection\ContainerAware;
 class FavoriteSearchResultService extends ContainerAware {
 
 	/**
+	 * @return array FavoriteSearchResult elements
+	 */
+	public function getFavorites() {
+		$user = $this->container->get('security.token_storage')->getToken()->getUser();
+		if(!($user instanceof User)) {
+			return array();
+		}
+
+		/** @var FavoriteSearchResultRepository $repository */
+		$repository = $this->container->get('doctrine')->getRepository('AppBundle:FavoriteSearchResult');
+		return $repository->findAllByUser($user);
+	}
+
+	/**
 	 * @param array $results The parsed results
 	 * @param array $urls Array with just urls
 	 * @return array With SearchResult elements or empty array of no pages where found
