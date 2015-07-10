@@ -24,8 +24,8 @@
                         <a data-url="{{ result.url|e }}" data-description="{{ result.description|e }}" data-title="{{ result.title|e }}"
                            href="{{ path('app_search_search', {'q': q, 'link': result.url}) }}" class="list-group-item {% if result.url == link.url %}active{% endif %}">
                             <span class="badge favorite {% if not result.favorite %}hide{% endif %}"
-                                  data-un-mark="{{ path('app_favoritesearchresult_unmark', {'q': q, 'url': result.url, 'title': result.title, 'ajax': true})|e }}"
-                                  data-mark="{{ path('app_favoritesearchresult_mark', {'q': q, 'url': result.url, 'title': result.title, 'ajax': true})|e }}">
+                                  data-un-mark="{{ path('app_favoritesearchresult_unmark', {'q': q, 'url': result.url, 'title': result.title, 'ajax': is_granted('IS_AUTHENTICATED_REMEMBERED')})|e }}"
+                                  data-mark="{{ path('app_favoritesearchresult_mark', {'q': q, 'url': result.url, 'title': result.title, 'ajax': is_granted('IS_AUTHENTICATED_REMEMBERED')})|e }}">
                                 <span class="glyphicon glyphicon-star-empty" aria-hidden="true"></span>
                             </span>
 
