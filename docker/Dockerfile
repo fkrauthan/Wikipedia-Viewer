@@ -18,7 +18,7 @@ RUN chown -R www-data:www-data /var/www
 WORKDIR /var/www
 
 
-VOLUME ["/var/www/app/database"]
+VOLUME ["/var/database"]
 
 
 ADD resources/bootstrap.sh /bootstrap.sh

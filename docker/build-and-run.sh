@@ -49,13 +49,15 @@ rm -Rf ./project
 if [ ! -d ./database ]; then
     echo "> Create database directory"
     mkdir ./database
+    chmod 777 ./database
 fi
 
 if type "boot2docker" > /dev/null 2>&1; then
-    echo "> Run the container (You can exit stop it with CTRL+C) Please open http://BOOT2DOCKERIP:1991"
+    ip=$(boot2docker ip)
+    echo "> Run the container (You can exit stop it with CTRL+C) Please open http://$ip:1991"
 else
     echo "> Run the container (You can exit stop it with CTRL+C) Please open http://localhost:1991"
 fi
 
 dir=$(pwd)
-$docker_prefix docker run -i -t -p 1991:80 -v $dir/database:/var/www/app/database  --rm fkrauthan/wikipedia-viewer
+$docker_prefix docker run -i -t -p 1991:80 -v $dir/database:/var/database  --rm fkrauthan/wikipedia-viewer
