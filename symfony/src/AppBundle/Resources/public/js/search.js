@@ -32,6 +32,7 @@ $('.search-results .list-group a').click(function (e) {
     $('#result-url').attr('href', url).text(url);
     $('#result-description').text(title);
     $('#result-iframe').attr('src', url);
+    $('#mark-favorite-login').attr('href', markUrl);
 
     var unMarkFavoriteEl = $('#un-mark-favorite');
     var markFavoriteEl = $('#mark-favorite');
