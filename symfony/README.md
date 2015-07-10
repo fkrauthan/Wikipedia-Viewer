@@ -1,7 +1,7 @@
 symfony
 =======
 
-A wikipedia title prefix search application implemented with symfony
+A wikipedia title prefix search application implemented with symfony. The project took me start to finish around 10 hours.
 
 
 What do I need?
