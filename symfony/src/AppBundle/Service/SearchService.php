@@ -3,11 +3,11 @@ namespace AppBundle\Service;
 
 use AppBundle\Model\SearchResult;
 use GuzzleHttp\Client;
-use Symfony\Component\DependencyInjection\ContainerAware;
 
-class SearchService extends ContainerAware {
+class SearchService {
 
 	private static $SERVER = 'http://en.wikipedia.org/w/';
+
 	/**
 	 * @param string $term The search term
 	 * @return array With SearchResult elements or empty array of no pages where found
