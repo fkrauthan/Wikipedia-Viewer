@@ -57,7 +57,7 @@
                                         </a>
                                         <div id="change-favorite-spin-container" style="position: absolute;"></div>
                                     {% else %}
-                                        <a href="{{ path('app_favoritesearchresult_mark', {'q': q, 'url': link.url, 'title': link.title}) }}" class="favorite-icon"
+                                        <a id="mark-favorite" href="{{ path('app_favoritesearchresult_mark', {'q': q, 'url': link.url, 'title': link.title}) }}" class="favorite-icon"
                                            title="You need to login to add this result to your favorite list!">
                                             <span class="glyphicon glyphicon-star-empty" aria-hidden="true"></span>
                                         </a>
