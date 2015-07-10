@@ -24,11 +24,9 @@
                 <div class="col-md-4 col-sm-6">
                     <div class="list-group">
                         {% for favorite in favorites %}
-                            <a data-url="{{ favorite.url|e }}" data-title="{{ favorite.title|e }}" href="{{ path('app_favoritesearchresult_list', {'link': favorite.url}) }}" class="list-group-item {% if favorite.url == link.url %}active{% endif %}">
+                            <a href="{{ path('app_favoritesearchresult_list', {'link': favorite.url}) }}" class="list-group-item {% if favorite.url == link.url %}active{% endif %}">
                                 {{ favorite.title }}<br />
-                                <div class="result-url">
-                                    <small>{{ favorite.url }}</small>
-                                </div>
+                                <small>{{ favorite.url }}</small>
                             </a>
                         {% endfor %}
                     </div>
@@ -46,15 +44,15 @@
                                         </a>
                                     </div>
 
-                                    <span id="result-title">{{ link.title }}</span><br />
+                                    {{ link.title }}<br />
                                     <small>
-                                        <a id="result-url" href="{{ link.url }}">{{ link.url }}</a>
+                                        <a href="{{ link.url }}">{{ link.url }}</a>
                                     </small>
                                 </h4>
                             </div>
                             <div class="panel-collapse collapse in">
                                 <div class="panel-body">
-                                    <iframe src="{{ link.url }}" id="result-iframe"></iframe>
+                                    <iframe src="{{ link.url }}"></iframe>
                                 </div>
                             </div>
                         </div>
