@@ -22,13 +22,6 @@ class User extends BaseUser {
 	protected $id;
 
 	/**
-	 * @ORM\OneToMany(targetEntity="RecentSearch", mappedBy="user", cascade={"remove"})
-	 *
-	 * @var ArrayCollection
-	 */
-	protected $recentSearches;
-
-	/**
 	 * @ORM\OneToMany(targetEntity="FavoriteSearchResult", mappedBy="user", cascade={"remove"})
 	 *
 	 * @var ArrayCollection

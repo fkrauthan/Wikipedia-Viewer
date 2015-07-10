@@ -3,6 +3,7 @@ namespace AppBundle\Controller;
 
 use AppBundle\Model\SearchResult;
 use AppBundle\Service\SearchService;
+use AppBundle\Service\SearchTermService;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Route;
 use Symfony\Bundle\FrameworkBundle\Controller\Controller;
 use Symfony\Component\HttpFoundation\Request;
@@ -25,9 +26,13 @@ class SearchController extends Controller {
 		}
 
 		if(count($searchResults) == 0) {
-			return $this->render('AppBundle:Search:no_results.html.twig', array('q' => $searchTerm));
+			$topSearchTerms = $this->getSearchTermService()->getTop5SearchTerms();
+
+			return $this->render('AppBundle:Search:no_results.html.twig', array('q' => $searchTerm, 'topSearchTerms' => $topSearchTerms));
 		}
 		else {
+			$this->getSearchTermService()->track($searchTerm);
+
 			$link = $request->get('link', '');
 			$link = $this->findResultForLink($searchResults, $link);
 			if($link == null) {
@@ -62,6 +67,13 @@ class SearchController extends Controller {
 	 */
 	private function getSearchService() {
 		return $this->container->get('app.search');
+	}
+
+	/**
+	 * @return SearchTermService
+	 */
+	private function getSearchTermService() {
+		return $this->container->get('app.search_term');
 	}
 
 }

@@ -2,11 +2,29 @@
 {% block title %}Home{% endblock %}
 {% block page_title %}Home{% endblock %}
 
+{% block javascripts %}
+    {% include 'AppBundle:elements:search_field_js.html.twig' %}
+{% endblock %}
+
 {% block content %}
     {% include 'AppBundle:elements:search_field.html.twig' %}
 
     <div class="search-results">
         <h2>Search Results</h2>
         <div class="alert alert-warning"><strong>Not found!</strong> Unfortunately we are not able to locate any wikipedia pages with the search term "{{ q }}".</div>
+
+        {% if topSearchTerms|length > 0 %}
+            <p>
+                {% transchoice topSearchTerms|length %}
+                {1}Why don't you try the following search term?|]1,Inf[Why don't you try one of the following search terms?
+                {% endtranschoice %}
+            </p>
+
+            <ul>
+                {% for searchTerm in topSearchTerms %}
+                    <li><a href="{{ path('app_search_search', {'q': searchTerm.term}) }}">{{ searchTerm.term }}</a></li>
+                {% endfor %}
+            </ul>
+        {% endif %}
     </div>
 {% endblock %}

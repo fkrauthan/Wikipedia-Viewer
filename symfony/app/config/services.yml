@@ -6,8 +6,8 @@ parameters:
 services:
     app.search:
         class: AppBundle\Service\SearchService
-        arguments: ["@service_container"]
 
-#    service_name:
-#        class: AppBundle\Directory\ClassName
-#        arguments: ["@another_service_name", "plain_value", "%parameter_name%"]
+    app.search_term:
+        class: AppBundle\Service\SearchTermService
+        calls:
+            - [setContainer, ['@service_container']]
