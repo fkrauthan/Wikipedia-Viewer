@@ -2,8 +2,6 @@
 namespace AppBundle\Controller;
 
 use AppBundle\Entity\SearchTerm;
-use AppBundle\Model\SearchResult;
-use AppBundle\Service\SearchService;
 use AppBundle\Service\SearchTermService;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Method;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Route;
