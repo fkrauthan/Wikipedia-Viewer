@@ -3,8 +3,9 @@ namespace AppBundle\Service;
 
 use AppBundle\Model\SearchResult;
 use GuzzleHttp\Client;
+use Symfony\Component\DependencyInjection\ContainerAware;
 
-class SearchService {
+class SearchService extends ContainerAware {
 
 	private static $SERVER = 'http://en.wikipedia.org/w/';
 
@@ -26,7 +27,16 @@ class SearchService {
 
 		$body = $response->getBody();
 		$parsedBody = json_decode($body, true);
-		return $this->convertResponseToArrayOfSearchResultObjects($parsedBody);
+		return $this->markFavorites($this->convertResponseToArrayOfSearchResultObjects($parsedBody), $parsedBody[3]);
+	}
+
+	/**
+	 * @param array $results The parsed results
+	 * @param array $urls Array with just urls
+	 * @return array With SearchResult elements or empty array of no pages where found
+	 */
+	private function markFavorites(array $results, array $urls) {
+		return $this->getFavoriteSearchResultService()->markFavorites($results, $urls);
 	}
 
 	/**
@@ -51,5 +61,12 @@ class SearchService {
 		return array(
 			'User-Agent' => 'WikipediaViewer/1.0'
 		);
+	}
+
+	/**
+	 * @return \AppBundle\Service\FavoriteSearchResultService
+	 */
+	private function getFavoriteSearchResultService() {
+		return $this->container->get('app.favorite_search_result');
 	}
 }

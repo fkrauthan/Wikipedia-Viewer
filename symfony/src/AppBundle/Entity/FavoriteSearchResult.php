@@ -5,7 +5,7 @@ use Doctrine\ORM\Mapping as ORM;
 
 
 /**
- * @ORM\Entity
+ * @ORM\Entity(repositoryClass="AppBundle\Repository\FavoriteSearchResultRepository")
  * @ORM\Table(name="favorite_search_results")
  */
 class FavoriteSearchResult {
@@ -26,6 +26,20 @@ class FavoriteSearchResult {
 	 * @var User
 	 */
 	protected $user;
+
+	/**
+	 * @ORM\Column(name="title", type="string", length=255)
+	 *
+	 * @var string
+	 */
+	protected $title;
+
+	/**
+	 * @ORM\Column(name="url", type="string", length=255)
+	 *
+	 * @var string
+	 */
+	protected $url;
 
 	/**
 	 * @return int
@@ -53,6 +67,34 @@ class FavoriteSearchResult {
 	 */
 	public function setUser(User $user) {
 		$this->user = $user;
+	}
+
+	/**
+	 * @return string
+	 */
+	public function getTitle() {
+		return $this->title;
+	}
+
+	/**
+	 * @param string $title
+	 */
+	public function setTitle($title) {
+		$this->title = $title;
+	}
+
+	/**
+	 * @return string
+	 */
+	public function getUrl() {
+		return $this->url;
+	}
+
+	/**
+	 * @param string $url
+	 */
+	public function setUrl($url) {
+		$this->url = $url;
 	}
 
 }

@@ -6,8 +6,15 @@ parameters:
 services:
     app.search:
         class: AppBundle\Service\SearchService
+        calls:
+            - [setContainer, ['@service_container']]
 
     app.search_term:
         class: AppBundle\Service\SearchTermService
+        calls:
+            - [setContainer, ['@service_container']]
+
+    app.favorite_search_result:
+        class: AppBundle\Service\FavoriteSearchResultService
         calls:
             - [setContainer, ['@service_container']]
