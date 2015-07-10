@@ -25,7 +25,7 @@
                     <div class="list-group">
                         {% for favorite in favorites %}
                             <a href="{{ path('app_favoritesearchresult_list', {'link': favorite.url}) }}" class="list-group-item {% if favorite.url == link.url %}active{% endif %}">
-                                {{ favorite.title }}<br />
+                                {{ favorite.title }}<br/>
                                 <small>{{ favorite.url }}</small>
                             </a>
                         {% endfor %}
@@ -44,7 +44,7 @@
                                         </a>
                                     </div>
 
-                                    {{ link.title }}<br />
+                                    {{ link.title }}<br/>
                                     <small>
                                         <a href="{{ link.url }}">{{ link.url }}</a>
                                     </small>
