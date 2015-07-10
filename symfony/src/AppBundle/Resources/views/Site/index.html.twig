@@ -1,6 +1,10 @@
 {% extends 'AppBundle::layout.html.twig' %}
 {% block title %}Home{% endblock %}
 
+{% block javascripts %}
+    {% include 'AppBundle:elements:search_field_js.html.twig' %}
+{% endblock %}
+
 {% block content %}
     <div class="jumbotron">
         <h1>Welcome</h1>

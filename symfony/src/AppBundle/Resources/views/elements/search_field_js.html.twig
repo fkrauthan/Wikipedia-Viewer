@@ -1,0 +1,14 @@
+
+<script type="text/javascript">
+    $('#search-field').typeahead({
+        minLength: 1,
+        highlight: true
+    }, {
+        name: 'dataset',
+        source: function(query, syncResults, asyncResults) {
+            $.post('{{ path('app_searchterm_suggest')|e }}', {q: query}, function(data) {
+                asyncResults(data);
+            });
+        }
+    });
+</script>

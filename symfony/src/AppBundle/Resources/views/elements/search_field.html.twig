@@ -2,10 +2,12 @@
 <div class="well">
     <form action="{{ path('app_search_search') }}" method="GET">
         <div class="form-group">
-            <input type="text" name="q" value="{{ q|default('') }}" required  class="form-control input-lg" placeholder="Enter search term...">
+            <div class="input-group">
+                <input id="search-field" type="text" name="q" value="{{ q|default('') }}" required  class="form-control input-lg typeahead" placeholder="Enter search term...">
+                <span class="input-group-btn">
+                    <button type="submit" class="btn btn-lg btn-primary">Search</button>
+                </span>
+            </div>
         </div>
-        <button type="submit" class="btn btn-primary">Search</button>
     </form>
 </div>
-
-
