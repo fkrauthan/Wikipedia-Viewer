@@ -1,8 +1,8 @@
 FROM php:5.6-apache
 
 RUN apt-get update \
-    && apt-get install -y libicu-dev libpng-dev libsqlite3-dev \
-    && docker-php-ext-install mbstring intl gd
+    && apt-get install -y git libicu-dev libpng-dev libsqlite3-dev \
+    && docker-php-ext-install mbstring intl gd zip
 
 ADD resources/vhost.conf /etc/apache2/sites-enabled/000-default.conf
 ADD resources/php.ini /usr/local/etc/php/php.ini
