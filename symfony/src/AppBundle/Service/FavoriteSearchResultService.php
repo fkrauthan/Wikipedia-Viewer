@@ -9,7 +9,6 @@ use Symfony\Component\DependencyInjection\ContainerAware;
 
 class FavoriteSearchResultService extends ContainerAware {
 
-
 	/**
 	 * @param array $results The parsed results
 	 * @param array $urls Array with just urls
