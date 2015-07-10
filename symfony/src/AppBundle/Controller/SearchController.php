@@ -21,11 +21,11 @@ class SearchController extends Controller {
 		$searchTerm = $request->get('q', '');
 		$searchResults = array();
 
-		if(!empty($searchTerm)) {
+		if (!empty($searchTerm)) {
 			$searchResults = $this->getSearchService()->findWikipediaPages($searchTerm);
 		}
 
-		if(count($searchResults) == 0) {
+		if (count($searchResults) == 0) {
 			$topSearchTerms = $this->getSearchTermService()->getTop5SearchTerms();
 
 			return $this->render('AppBundle:Search:no_results.html.twig', array('q' => $searchTerm, 'topSearchTerms' => $topSearchTerms));
@@ -35,7 +35,7 @@ class SearchController extends Controller {
 
 			$link = $request->get('link', '');
 			$link = $this->findResultForLink($searchResults, $link);
-			if($link == null) {
+			if ($link == null) {
 				$link = $searchResults[0];
 			}
 
@@ -49,13 +49,13 @@ class SearchController extends Controller {
 	 * @return SearchResult|null The search result where the link belong to
 	 */
 	private function findResultForLink(array $searchResults, $link) {
-		if($link == '') {
+		if ($link == '') {
 			return null;
 		}
 
-		foreach($searchResults as $result) {
+		foreach ($searchResults as $result) {
 			/** @var SearchResult $result */
-			if($result->getUrl() == $link) {
+			if ($result->getUrl() == $link) {
 				return $result;
 			}
 		}

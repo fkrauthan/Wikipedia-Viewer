@@ -25,7 +25,7 @@ class SearchTermService extends ContainerAware {
 			->getQuery();
 		$updated = $query->execute();
 
-		if($updated == 0) {
+		if ($updated == 0) {
 			$searchTerm = new SearchTerm();
 			$searchTerm->setTerm($term);
 			$searchTerm->setCount(1);

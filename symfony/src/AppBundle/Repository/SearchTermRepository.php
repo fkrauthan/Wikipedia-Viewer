@@ -10,7 +10,7 @@ class SearchTermRepository extends EntityRepository {
 	 * @return array of top x search terms
 	 */
 	public function findTopXSearchTerms($count) {
-		$query =  $this->createQueryBuilder('s')
+		$query = $this->createQueryBuilder('s')
 			->orderBy('s.count', 'DESC')
 			->setMaxResults($count)
 			->getQuery();
@@ -23,7 +23,7 @@ class SearchTermRepository extends EntityRepository {
 	 * @return array of top x search term suggestions
 	 */
 	public function findTopXSearchTermSuggestions($count, $term) {
-		$query =  $this->createQueryBuilder('s')
+		$query = $this->createQueryBuilder('s')
 			->where('s.term LIKE :term')
 			->orderBy('s.count', 'DESC')
 			->setParameter('term', '%' . $term . '%')

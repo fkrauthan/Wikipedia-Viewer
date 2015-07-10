@@ -15,7 +15,7 @@ class FavoriteSearchResultService extends ContainerAware {
 	 */
 	public function getFavorites() {
 		$user = $this->container->get('security.token_storage')->getToken()->getUser();
-		if(!($user instanceof User)) {
+		if (!($user instanceof User)) {
 			return array();
 		}
 
@@ -31,7 +31,7 @@ class FavoriteSearchResultService extends ContainerAware {
 	 */
 	public function markFavorites(array $results, array $urls) {
 		$user = $this->container->get('security.token_storage')->getToken()->getUser();
-		if(!($user instanceof User)) {
+		if (!($user instanceof User)) {
 			return $results;
 		}
 
@@ -40,9 +40,9 @@ class FavoriteSearchResultService extends ContainerAware {
 		$urls = $repository->findAllFavoredUrls($user, $urls);
 		$urlsArray = $this->favoriteSearchResultToUrlArray($urls);
 
-		foreach($results as $result) {
+		foreach ($results as $result) {
 			/** @var SearchResult $result */
-			if(in_array($result->getUrl(), $urlsArray)) {
+			if (in_array($result->getUrl(), $urlsArray)) {
 				$result->setFavorite(true);
 			}
 		}
@@ -55,14 +55,14 @@ class FavoriteSearchResultService extends ContainerAware {
 	 */
 	public function markAsFavorite($url, $title) {
 		$user = $this->container->get('security.token_storage')->getToken()->getUser();
-		if(!($user instanceof User)) {
+		if (!($user instanceof User)) {
 			return;
 		}
 
 		/** @var FavoriteSearchResultRepository $repository */
 		$repository = $this->container->get('doctrine')->getRepository('AppBundle:FavoriteSearchResult');
 		$favorite = $repository->findFavoredUrl($user, $url, $title);
-		if($favorite == null) {
+		if ($favorite == null) {
 			$favorite = new FavoriteSearchResult();
 			$favorite->setUser($user);
 			$favorite->setUrl($url);
@@ -81,14 +81,14 @@ class FavoriteSearchResultService extends ContainerAware {
 	 */
 	public function unMarkAsFavorite($url, $title) {
 		$user = $this->container->get('security.token_storage')->getToken()->getUser();
-		if(!($user instanceof User)) {
+		if (!($user instanceof User)) {
 			return;
 		}
 
 		/** @var FavoriteSearchResultRepository $repository */
 		$repository = $this->container->get('doctrine')->getRepository('AppBundle:FavoriteSearchResult');
 		$favorite = $repository->findFavoredUrl($user, $url, $title);
-		if($favorite != null) {
+		if ($favorite != null) {
 			/** @var ObjectManager $registry */
 			$om = $this->container->get('doctrine')->getManager();
 			$om->remove($favorite);
@@ -102,7 +102,7 @@ class FavoriteSearchResultService extends ContainerAware {
 	 */
 	private function favoriteSearchResultToUrlArray(array $results) {
 		$urls = array();
-		foreach($results as $result) {
+		foreach ($results as $result) {
 			/** @var FavoriteSearchResult $result */
 			$urls[] = $result->getUrl();
 		}

@@ -14,7 +14,7 @@ class FavoriteSearchResultRepository extends EntityRepository {
 	 * @return array of FavoriteSearchResult objects that are actually favored
 	 */
 	public function findAllFavoredUrls(User $user, array $urls) {
-		$query =  $this->createQueryBuilder('f')
+		$query = $this->createQueryBuilder('f')
 			->where('f.user = :user and f.url in (:urls)')
 			->setParameter('user', $user)
 			->setParameter('urls', $urls)
@@ -29,7 +29,7 @@ class FavoriteSearchResultRepository extends EntityRepository {
 	 * @return FavoriteSearchResult|null the favorite search result or null of it was not found
 	 */
 	public function findFavoredUrl(User $user, $url, $title) {
-		$query =  $this->createQueryBuilder('f')
+		$query = $this->createQueryBuilder('f')
 			->where('f.user = :user and f.url = :url and f.title = :title')
 			->setParameter('user', $user)
 			->setParameter('url', $url)
@@ -38,7 +38,7 @@ class FavoriteSearchResultRepository extends EntityRepository {
 
 		try {
 			return $query->getSingleResult();
-		} catch(NoResultException $e) {
+		} catch (NoResultException $e) {
 			return null;
 		}
 	}
@@ -48,7 +48,7 @@ class FavoriteSearchResultRepository extends EntityRepository {
 	 * @return array of FavoriteSearchResult objects that belong to given user
 	 */
 	public function findAllByUser(User $user) {
-		$query =  $this->createQueryBuilder('f')
+		$query = $this->createQueryBuilder('f')
 			->where('f.user = :user')
 			->setParameter('user', $user)
 			->getQuery();

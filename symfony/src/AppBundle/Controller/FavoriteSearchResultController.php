@@ -22,10 +22,10 @@ class FavoriteSearchResultController extends Controller {
 		$favorites = $this->getFavoriteSearchResultService()->getFavorites();
 
 		$link = null;
-		if(count($favorites) > 0) {
+		if (count($favorites) > 0) {
 			$link = $request->get('link', '');
 			$link = $this->findResultForLink($favorites, $link);
-			if($link == null) {
+			if ($link == null) {
 				$link = $favorites[0];
 			}
 		}
@@ -45,7 +45,7 @@ class FavoriteSearchResultController extends Controller {
 	public function markAction(Request $request) {
 		$url = $request->get('url');
 		$title = $request->get('title');
-		if(empty($url) || empty($title)) {
+		if (empty($url) || empty($title)) {
 			throw new BadRequestHttpException('url and title are required!');
 		}
 
@@ -62,7 +62,7 @@ class FavoriteSearchResultController extends Controller {
 	public function unMarkAction(Request $request) {
 		$url = $request->get('url');
 		$title = $request->get('title');
-		if(empty($url) || empty($title)) {
+		if (empty($url) || empty($title)) {
 			throw new BadRequestHttpException('url and title are required!');
 		}
 
@@ -77,12 +77,12 @@ class FavoriteSearchResultController extends Controller {
 	 */
 	private function createResponse(Request $request, $url) {
 		$ajax = $request->get('ajax', false);
-		if($ajax) {
+		if ($ajax) {
 			return Response::create('', 201);
 		}
 
 		$q = $request->get('q');
-		if(!empty($q)) {
+		if (!empty($q)) {
 			return $this->redirectToRoute('app_search_search', array(
 				'q' => $q,
 				'link' => $url
@@ -106,13 +106,13 @@ class FavoriteSearchResultController extends Controller {
 	 * @return FavoriteSearchResult|null The favorite search result where the link belong to
 	 */
 	private function findResultForLink(array $favorites, $link) {
-		if($link == '') {
+		if ($link == '') {
 			return null;
 		}
 
-		foreach($favorites as $favorite) {
+		foreach ($favorites as $favorite) {
 			/** @var FavoriteSearchResult $favorite */
-			if($favorite->getUrl() == $link) {
+			if ($favorite->getUrl() == $link) {
 				return $favorite;
 			}
 		}

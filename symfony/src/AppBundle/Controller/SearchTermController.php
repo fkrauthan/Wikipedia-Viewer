@@ -22,13 +22,13 @@ class SearchTermController extends Controller {
 	 */
 	public function suggestAction(Request $request) {
 		$term = $request->get('q', '');
-		if(strlen($term) < 1) {
+		if (strlen($term) < 1) {
 			throw new AccessDeniedHttpException('You have to provide at least 3 characters for suggestions!');
 		}
 
 		$suggestions = $this->getSearchTermService()->getTop5Suggestions($term);
 		$suggestionsArray = array();
-		foreach($suggestions as $suggestion) {
+		foreach ($suggestions as $suggestion) {
 			/** @var SearchTerm $suggestion */
 			$suggestionsArray[] = $suggestion->getTerm();
 		}

@@ -47,7 +47,7 @@ class SearchService extends ContainerAware {
 		$results = array();
 
 		$numResults = count($response[1]);
-		for($i=0; $i<$numResults; $i++) {
+		for ($i = 0; $i < $numResults; $i++) {
 			$results[] = new SearchResult($response[1][$i], $response[2][$i], $response[3][$i]);
 		}
 
